@@ -34,6 +34,22 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit',()=>{
         .type(longText, {delay: 0})
         .should('have.value',longText)
 
-    cy.get('button[type="submit"]').click()
+    cy.submeter()
 
+})
+
+Cypress.Commands.add('preencheCampos',()=>{
+    const longText = 'teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste, teste'
+    
+    cy.get('#firstName').type('Olá Mundo').should('have.value','Olá Mundo')
+    cy.get('#lastName').type('Olá Mundo sobrenome').should('have.value','Olá Mundo sobrenome')
+    cy.get('#email').type('ola.mundo@gmail.com').should('have.value','ola.mundo@gmail.com')
+    cy.get('#open-text-area')
+        .type(longText, {delay: 0})
+        .should('have.value',longText)
+})
+
+Cypress.Commands.add('submeter',()=>{
+    cy.get('button[type="submit"]').click()
+    cy.get('.success').should('be.visible')
 })
