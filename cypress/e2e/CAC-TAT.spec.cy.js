@@ -45,6 +45,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#phone').type('qwertyuiopasdfghjklçzxcvbnm').should('be.empty')
   });
 
+  //exercicio 4
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
     cy.get('#phone-checkbox').check()
     cy.get('.button').click()
@@ -52,14 +53,19 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('.error').should('be.visible')
   });
 
+  //exercicio 5
   it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
     cy.get('#firstName').type('teste teste teste').should('have.value','teste teste teste').clear().should('have.value','')
   });
  
-  it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+  //exercicio 6
+  it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
     cy.get('#phone').type('99999999')
     cy.get('.button').click()
     cy.get('.error').should('be.visible')
   });
+
+  //exercicio 7
+  
 
 })
