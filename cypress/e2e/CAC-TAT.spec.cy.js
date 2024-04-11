@@ -111,7 +111,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   });
 
   //exercicio extra
-  it.only('marca cada tipo de atendimento', () => {
+  it('marca cada tipo de atendimento', () => {
 
     cy.get('input[type="radio"]')
       .should('have.length', 3)
@@ -121,6 +121,34 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       })
   });
 
+  //aula 5
+  //exercicio
+  it('marca ambos checkboxes, depois desmarca o último', () => {
+    var checkbokes ='input[type="checkbox"]'
+/*
+    cy.get(checkbokes).
+      should('have.length', 2)
+      .each(($check)=>{
+        cy.wrap($check).check()
+        cy.wrap($check).should('be.checked')
+      })
+    cy.get(checkbokes).last().uncheck().should('not.be.checked')
+*/
+      cy.get(checkbokes)
+        .check()
+        .should('be.checked')
+        .last()
+        .uncheck()
+        .should('not.be.checked')
+    
+  });
+
+  it.only('seleciona um arquivo da pasta fixtures', () => {
+    cy.get('input[type="file"]')
+      .selectFile('./cypress/fixtures/example.json')
+        .should('have.text','example.json')
+    
+  });
 
 
 })
