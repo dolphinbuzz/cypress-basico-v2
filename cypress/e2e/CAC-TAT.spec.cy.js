@@ -143,12 +143,57 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     
   });
 
-  it.only('seleciona um arquivo da pasta fixtures', () => {
+  //aula 06
+  //exercicio
+  it('seleciona um arquivo da pasta fixtures', () => {
     cy.get('input[type="file"]')
+      .should('not.have.value')
       .selectFile('./cypress/fixtures/example.json')
-        .should('have.text','example.json')
-    
+      .should(($input)=>{
+        expect($input[0].files[0].name).to.equal('example.json')
+      })
   });
+
+  //exercicio extra 1
+  it('seleciona um arquivo simulando um drag-and-drop', () => {
+    cy.get('input[type="file"]')
+    .should('not.have.value')
+    .selectFile('./cypress/fixtures/example.json', {action: 'drag-drop'})
+    .should(($input)=>{
+      expect($input[0].files[0].name).to.equal('example.json')
+    })
+  });
+
+  //exercicio 2
+  it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', () => {
+   cy.fixture('example.json').as('arquivo')
+
+    cy.get('input[type="file"]')
+    .should('not.have.value')
+    .selectFile('@arquivo', {action: 'drag-drop'})
+    .should(($input)=>{
+      expect($input[0].files[0].name).to.equal('example.json')
+    })
+  });
+
+  //aula 07
+  //exercicio
+  it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+    cy.get('a').should('have.attr','target', '_blank')
+  });
+
+  //exercicio extra 1
+  it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+    cy.get('a')
+      .invoke('removeAttr','target')
+      .should('not.have.class','target')
+      .click()
+      
+    cy.title().should('eq','Central de Atendimento ao Cliente TAT - Política de privacidade')
+  });
+
+
+
 
 
 })
