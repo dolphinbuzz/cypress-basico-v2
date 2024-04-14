@@ -1,6 +1,6 @@
 Cypress.Commands.add('fillMandatoryFieldsAndSubmit',()=>{
     const longText = Cypress._.repeat('teste ', 70)
-    cy.clock()
+    
     cy.get('#firstName').type('Olá Mundo',{delay:0}).should('have.value','Olá Mundo')
     cy.get('#lastName').type('Olá Mundo sobrenome',{delay:0}).should('have.value','Olá Mundo sobrenome')
     cy.get('#email').type('ola.mundo@gmail.com',{delay:0}).should('have.value','ola.mundo@gmail.com')
@@ -9,7 +9,7 @@ Cypress.Commands.add('fillMandatoryFieldsAndSubmit',()=>{
         .should('have.value',longText)
 
     cy.submeter()
-    cy.tick(3000)
+    
 
 })
 
