@@ -92,6 +92,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('#product').select('mentoria').should('have.value','mentoria')
 
     cy.submeter()
+    cy.get('.success').should('be.visible')
   });
   
   //exercicio extra 2
@@ -193,7 +194,63 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   });
 
 
+  //aula 11
+  //exercicio
 
+  it('exibe mensagem por 3 segundos', function() {
+    cy.clock() // congela o relógio do navegador
+  
+    cy.fillMandatoryFieldsAndSubmit()
+    cy.get('.success').should('be.visible')  
+    cy.tick(3000) 
+    cy.get('.success').should('not.be.visible')
 
+    cy.clock() // congela o relógio do navegador
+  
+    cy.submeter()
+    cy.get('.error').should('be.visible')  
+    cy.tick(3000) 
+    cy.get('.error').should('not.be.visible')
+    
+  });
+
+  
+  //exercicio extra 1
+  it('teste com lodash', () => {
+
+    Cypress._.times(5,()=>{
+      cy.fillMandatoryFieldsAndSubmit()
+    })
+    
+  });
+
+  //exercicio extra 2
+  it('exibe e esconde as mensagens de sucesso e erro usando o .invoke()', () => {
+    
+    cy.get('.success')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Mensagem enviada com sucesso.')
+      .invoke('hide')
+      .should('not.be.visible')
+      
+    cy.get('.error')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios')
+      .invoke('hide')
+      .should('not.be.visible')
+  });
+
+  //exercicio 3
+  it('preenche a area de texto usando o comando invoke', () => {
+    const longText = Cypress._.repeat('0123456789',20)
+    cy.get('#open-text-area')
+      .invoke('val',longText)
+      .should('have.value',longText)
+  
+  });
 
 })
