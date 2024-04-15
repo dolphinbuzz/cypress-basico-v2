@@ -253,4 +253,18 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   
   });
 
+  //desafio aula 12
+  it('encontrando o gato', () => {
+    cy.get('#cat')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible') 
+      
+    cy.get('#title')
+      .invoke('text', 'ACHEI O GATO')
+    
+    cy.get('#subtitle')
+      .invoke('text', 'Eu 🫶 gatos')
+  });
+
 })

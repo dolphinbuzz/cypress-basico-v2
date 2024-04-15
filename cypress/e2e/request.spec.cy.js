@@ -1,4 +1,4 @@
-it.only('faz uma requisição HTTP', () => {
+it('faz uma requisição HTTP', () => {
     cy.request({
         method: 'GET',
         url: 'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html'  
